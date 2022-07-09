@@ -271,10 +271,10 @@ void loop() {
     if (millis() - alarmTmr >= 500) {
         alarmTmr = millis();
         debug("loop: alarmClock, " + (String)(alarmTime / 100) + ":" + (String)(alarmTime % 100));
-        if (alarmFlag)digitalWrite(buzzPin, !digitalRead(buzzPin));
+        if (alarmFlag && enableAlarmSetting)digitalWrite(buzzPin, !digitalRead(buzzPin));
         else digitalWrite(buzzPin, false);
     }
-
+    //
     static uint32_t tmr = 0;
     if (millis() - tmr >= 100) {
         tmr = millis();
@@ -295,7 +295,7 @@ void loop() {
     #endif
         break;
     case 2:
-   #if enableAlarmSetting == 1
+    #if enableAlarmSetting == 1
         alarmFunc();
     #endif
         break;
