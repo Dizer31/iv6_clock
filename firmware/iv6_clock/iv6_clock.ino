@@ -290,13 +290,13 @@ void loop() {
 
     switch (mode) {
     case 1:
-    #if enableAlarmSetting == 1
-        alarmFunc();
+    #if enableTimeSetting == 1
+        setTime();
     #endif
         break;
     case 2:
-    #if enableTimeSetting == 1
-        setTime();
+   #if enableAlarmSetting == 1
+        alarmFunc();
     #endif
         break;
     }
