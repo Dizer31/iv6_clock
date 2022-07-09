@@ -71,7 +71,7 @@ volatile uint8_t anod[] = { 9,10,11,12 };  //пины разрядов
 volatile uint8_t buf[4];    //буфер дисплея
 uint8_t mode = 0;
 
-uint16_t alarmTime = 0;
+int16_t alarmTime = -1;
 bool alarmFlag = false;
 uint32_t modeTmr = 0;
 //-----special variables-----//
