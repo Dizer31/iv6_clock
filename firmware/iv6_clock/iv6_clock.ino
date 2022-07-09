@@ -17,7 +17,10 @@
 #define plusPin A2
 #define minusPin A3
 
-#define buzzPin 13
+#define buzzPin 13  
+
+#define enableTimeSetting 1 //включить/отключить настройку времени
+#define enableAlarmSetting 1    //включить/отключить настройку будильника
 //-----setting-----//
 
 
@@ -76,6 +79,7 @@ uint32_t modeTmr = 0;
 
 //-----func-----//
 #pragma region
+#if enableTimeSetting == 1
 void setTime() {
     static int8_t sH = 0, sM = 0;
     static bool sMode = false;
@@ -132,7 +136,9 @@ void setTime() {
         buf[3] = (indFlag ? sM % 10 : 10);
     }
 }
+#endif
 
+#if enableAlarmSetting == 1
 void alarmFunc() {
     static bool aMode = false;  //режим часы/минуты
     static int8_t ah = 0, am = 0;  //*alarm time
@@ -185,6 +191,7 @@ void alarmFunc() {
 
     alarmTime = ah * 100 + am;
 }
+#endif
 
 void setAnod(uint8_t num) {
     num = 0x01 << num;
@@ -199,7 +206,7 @@ void setDigit(uint8_t num) {
     for (uint8_t i = 0;i < 7;i++)setSegPin(segments[i], bitRead(num != 10 ? arr[num] : 0x00, i));
 }
 
-void setSegment(uint8_t x) {
+void setSegment(uint8_t x) {//тест сегментов
     x = 0x01 << x;
     for (uint8_t i = 0;i < 7;i++)setSegPin(segments[i], bitRead(x, i));
 }
@@ -283,10 +290,14 @@ void loop() {
 
     switch (mode) {
     case 1:
+    #if enableAlarmSetting == 1
         alarmFunc();
+    #endif
         break;
     case 2:
+    #if enableTimeSetting == 1
         setTime();
+    #endif
         break;
     }
 

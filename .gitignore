@@ -1,2 +1,4 @@
 .vscode/arduino.json
 .vscode/c_cpp_properties.json
+firmware/iv6_clock/func.h
+firmware/iv6_clock/symbols.h
